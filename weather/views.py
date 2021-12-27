@@ -98,7 +98,7 @@ def index(request):
 
 
 def get_data(request):
-    data = Weather_csv.objects.all()
+    data = Weather_csv.objects.all()[:7]
     data_objects = []
     for d in data:
         data_objects.append({
