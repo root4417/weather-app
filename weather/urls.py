@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('days/', views.days)
+    path('get-data/', views.get_data, name='get-data')
 ]
