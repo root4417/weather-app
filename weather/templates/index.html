@@ -43,14 +43,14 @@
         }
 
         .container1 > div {
-            background: #f4f4f4f4;
+            background: #b6b6b6f5;
             padding: 15px;
             border-right: 2px solid #047aed;
             border-radius: 14px;
         }
 
         .container1 > div:hover {
-            background: #f4f4f4f4;
+            background: #b6b6b6f5;
             padding: 15px;
         }
 
@@ -62,9 +62,11 @@
         .next-day-our-data{
             width: 200px;
             max-width: 200px;
+            min-height: 241px!important;
             overflow-y: hidden;
             overflow-x: hidden;
             padding: 20px!important;
+            backdrop-filter: blur(5px);
             /*box-shadow: rgba(17, 17, 26, 0.05) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;*/
             box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         }
@@ -121,20 +123,19 @@
 <div class="container1" style="display: flex; flex-direction: row; justify-content: space-evenly;">
 
     <!-- Seven Days -->
-
-    {% for value in data %}
-        <div class="next-day-our-data" id="{{ value.number }}">
-            <h3>{{ value.day|lower|capfirst }}</h3>
-            {% if forloop.counter0 == 0 %}
-                <img src="http://openweathermap.org/img/w/{{ value.icon }}.png" alt="" style="width: 70px; height: 70px;">
-            {% else %}
-                {% autoescape off %}{{ value.icon }}{% endautoescape %}
-            {% endif %}
-            <h3 class="mt-3">{{ value.description }}</h3>
-            <h3 class="mt-3">{{ value.temperature }} &#176;</h3>
-            <h3 class="mt-3">{{ value.humidity }} &#176;</h3>
-        </div>
-    {% endfor %}
+    {% if data == "FETCHED_CURRENT_STATE_FAILED"  %}
+        <h1> Unable to fetch current weather from openweather api.</h1>
+    {% else %}
+        {% for value in data %}
+            <div class="next-day-our-data" id="{{ value.day }}">
+                <h3>{{ value.day|lower|capfirst }}</h3>
+                <img src="{{ value.icon }}" alt="" style="width: 70px; height: 70px;">
+                <h3 class="mt-3">{{ value.weather_condition }}</h3>
+    {#            <h3 class="mt-3">{{ value.temperature }} &#176;</h3>#}
+    {#            <h3 class="mt-3">{{ value.humidity }} &#176;</h3>#}
+            </div>
+        {% endfor %}
+    {% endif %}
 
     <!-- Current Day -->
 
