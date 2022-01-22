@@ -38,15 +38,15 @@ def get_current_weather_state(weather_code):
 
 def get_weather_icon(prediction):
     if prediction == "R":
-        return 'https://openweathermap.org/img/wn/11d@2x.png'
+        return 'https://openweathermap.org/img/wn/11d@4x.png'
     elif prediction == "D":
-        return 'https://openweathermap.org/img/wn/09d@2x.png'
+        return 'https://openweathermap.org/img/wn/09d@4x.png'
     elif prediction == "C":
-        return 'https://openweathermap.org/img/wn/02d@2x.png'
+        return 'https://openweathermap.org/img/wn/02d@4x.png'
     elif prediction == "PC":
-        return 'https://openweathermap.org/img/wn/04d@2x.png'
+        return 'https://openweathermap.org/img/wn/04d@4x.png'
     else:
-        return 'https://openweathermap.org/img/wn/01d@2x.png'
+        return 'https://openweathermap.org/img/wn/01d@4x.png'
 
 
 def get_next_prediction(current_state):
@@ -139,7 +139,7 @@ def get_seven_days_prediction(current_weather_id):
 
     current_weather_state = get_current_weather_state(current_weather_id)
     seven_days_predictions.append({
-        'date': date_time_now.date(),
+        'date': date_time_now.strftime('%d/%m/%Y'),
         'day': get_day_name(date_time_now),
         'weather_condition': get_weather_full_name(current_weather_state),
         'weather_condition_short_name': current_weather_state,
@@ -151,7 +151,7 @@ def get_seven_days_prediction(current_weather_id):
         previous_weather_state = seven_days_predictions[i-1]['weather_condition_short_name']
         current_weather_state = get_next_prediction(previous_weather_state)
         seven_days_predictions.append({
-            'date': date_time_now.date(),
+            'date': date_time_now.strftime('%d/%m/%Y'),
             'day': get_day_name(date_time_now),
             'weather_condition': get_weather_full_name(current_weather_state),
             'weather_condition_short_name': current_weather_state,

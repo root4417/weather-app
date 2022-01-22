@@ -27,5 +27,9 @@ def get_data(request):
     r = requests.get(url=URL, params=PARAMS)
     res = r.json()
     res_id = res['id']
-    predictions = get_seven_days_prediction(res_id)
-    return HttpResponse(content=json.dumps({'data': predictions}), content_type='application/json')
+    if 'weather' in res and len(res['weather']) > 0:
+        res_id = res['weather'][0]['id']
+        predictions = get_seven_days_prediction(res_id)
+        return HttpResponse(content=json.dumps({'data': predictions}), content_type='application/json')
+    else:
+        return HttpResponse(status=404)
