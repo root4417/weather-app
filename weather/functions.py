@@ -120,7 +120,7 @@ def get_weather_full_name(state):
     elif state == "PC":
         return "Partly Cloudy"
     elif state == "D":
-        return "Drizzling"
+        return "Drizzle"
     else:
         return "Invalid"
 
